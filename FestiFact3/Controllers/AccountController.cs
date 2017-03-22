@@ -197,15 +197,11 @@ namespace FestiFact3.Controllers
             }
             var currentRole = await this.UserManager.GetRolesAsync(updateId);
             var role = currentRole.FirstOrDefault();
-            if (string.IsNullOrEmpty(role))
-            {
-                await this.UserManager.AddToRoleAsync(updateId, model.Name);
-            }
-            else
+            if (!string.IsNullOrEmpty(role))
             {
                 await this.UserManager.RemoveFromRoleAsync(updateId, role);
-                await this.UserManager.AddToRoleAsync(updateId, model.Name);
             }
+            await this.UserManager.AddToRoleAsync(updateId, model.Name);
             return RedirectToAction("Index", "Home");
         }
 
