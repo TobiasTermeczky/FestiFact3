@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FestiFact3.Models;
 
+//Controller
 namespace FestiFact3.Controllers
 {
     [Authorize]
