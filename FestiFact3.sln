@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FestiFact3", "FestiFact3\FestiFact3.csproj", "{7475EEA1-AC32-434D-AEDD-EA71034D6074}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00A859FB-1F03-439F-890B-8EECE2CBFDC7} = {00A859FB-1F03-439F-890B-8EECE2CBFDC7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{00A859FB-1F03-439F-890B-8EECE2CBFDC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{7475EEA1-AC32-434D-AEDD-EA71034D6074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7475EEA1-AC32-434D-AEDD-EA71034D6074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7475EEA1-AC32-434D-AEDD-EA71034D6074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00A859FB-1F03-439F-890B-8EECE2CBFDC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A859FB-1F03-439F-890B-8EECE2CBFDC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A859FB-1F03-439F-890B-8EECE2CBFDC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A859FB-1F03-439F-890B-8EECE2CBFDC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
