@@ -89,13 +89,15 @@
     <Compile Include="Abstract\IFestivalRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFFestivalRepository.cs" />
+    <Compile Include="Content\PartyEntities.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Festival.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
     <Folder Include="Context\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
     <Folder Include="scripts\" />
   </ItemGroup>
   <PropertyGroup>
