@@ -9,6 +9,8 @@ namespace Model.Models
     {
         public int Id { get; set; }
 
+        public Festival Festival { get; set; }
+
         public string Barcode { get; set; }
     }
 }
