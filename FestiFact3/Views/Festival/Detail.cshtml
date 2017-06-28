@@ -1,0 +1,75 @@
+﻿@model Model.Models.Festival
+@{
+    ViewBag.Title = "Detail";
+}
+<div id="bannerImage" class="row" style="min-height: 500px; background-image: url('@Model.ImageLink'); background-size: cover"></div>
+<div class="row">
+    <div class="col-xs-8">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StartTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EndTime)
+            </dd>
+            <dt>
+                TicketsLeft
+            </dt>
+            <dd>
+                @ViewBag.ticketsLeft
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genre)
+            </dd>
+            <dt>
+                Performances
+            </dt>
+            <dd>
+                @Html.ActionLink("Show Performances", "Performances", new { id = Model.Id })
+            </dd>
+        </dl>
+    </div>
+    <div class="col-xs-4">
+        <div>Tickets left: @ViewBag.ticketsLeft</div>
+        <div>
+            @if (ViewBag.ticketsLeft > 0)
+        {
+            @Html.ActionLink("Buy Ticket", "BuyTicket", "Ticket", new { id = Model.Id }, new { @class = "btn btn-success" })
+        }
+        else
+        {
+            <span>Sold out!</span>
+        }
+    </div>
+</div>
+</div>
+<p>
+    @Html.ActionLink("Back to Index", "Index")
+</p>

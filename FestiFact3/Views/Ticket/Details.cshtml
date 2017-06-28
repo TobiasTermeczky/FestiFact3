@@ -1,0 +1,53 @@
+﻿@model Model.Models.Ticket
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-radius: 25px;
+            padding: 5px;
+            width: 100%;
+            padding-right: 25px;
+        }
+
+        #qrcode {
+            width: 30%;
+        }
+
+        #ticketinfo {
+            vertical-align: top;
+            text-align: right;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="bannerImage">
+        <img src="@Model.Festival.ImageLink">
+    </div>
+    <table>
+        <tr>
+            <td id="qrcode">
+                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.qr))" />
+            </td>
+            <td id="ticketinfo">
+                <h1>@Model.Festival.Name</h1>
+                <h3>@Model.Festival.StartTime.ToString("dd/MM/yyyy HH:mm")</h3>
+                <h3>@Model.Festival.Location</h3>
+                <h3>€@Model.Festival.Price</h3>
+                <h2>@Model.UserEmail</h2>
+                <h3>@Model.BuyDateTime.ToString("dd/MM/yyyy HH:mm")</h3>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

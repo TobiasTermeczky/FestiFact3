@@ -1,0 +1,32 @@
+﻿@using Model.Models
+@model IEnumerable<Model.Models.Festival>
+@{
+    ViewBag.Title = "Index";
+}
+<h1>Festivals</h1>
+@using (Html.BeginForm(FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("search")
+        <input type="submit" value="Search" />
+    </p>
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Detail", new { id = item.Id })" style="display: block;">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="row">
+                    <img style="width: 100%; height: 100%;" src="@item.ImageLink" />
+                </div>
+                <div class="row">
+                    <div>
+                        <b>@item.Name</b>
+                    </div>
+                    <div>@item.StartTime.ToString("dd MMM yyyy") - @item.EndTime.ToString("dd MMM yyyy")</div>
+                    <div>@item.Location</div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

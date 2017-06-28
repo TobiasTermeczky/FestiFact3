@@ -31,7 +31,6 @@ namespace FestiFact3.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IFestivalRepository>().To<EFFestivalRepository>();
-            EFDbContext context = new EFDbContext();
         }
     }
 }

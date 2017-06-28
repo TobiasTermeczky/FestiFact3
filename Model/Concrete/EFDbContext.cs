@@ -12,15 +12,16 @@ namespace Model.Concrete
         public EFDbContext()
             : base("EFDbContext")
         {
-
         }
-    
-        public DbSet<Artist> Artist { get; set; }
 
-        public DbSet<Festival> Festival { get; set; }
+        public DbSet<Festival> Festivals { get; set; }
 
-        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
 
+        public DbSet<Performance> Performances { get; set;}
+        
+        public DbSet<Stage> Stages { get; set; }
+        
         public override int SaveChanges()
         {
             return base.SaveChanges();

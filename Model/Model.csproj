@@ -107,31 +107,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
-    <Content Include="scripts\bootstrap.js" />
-    <Content Include="scripts\bootstrap.min.js" />
-    <None Include="scripts\jquery-1.10.2-vsdoc.js" />
-    <Content Include="scripts\jquery-1.10.2.js" />
-    <Content Include="scripts\jquery-1.10.2.min.js" />
-    <None Include="scripts\jquery.validate-vsdoc.js" />
-    <Content Include="scripts\jquery.validate.js" />
-    <Content Include="scripts\jquery.validate.min.js" />
-    <Content Include="scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="scripts\modernizr-2.6.2.js" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\web.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -144,33 +121,68 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IFestivalRepository.cs" />
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFFestivalRepository.cs" />
+    <Compile Include="Concrete\FestivalInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706191205147_First mig.cs" />
-    <Compile Include="Migrations\201706191205147_First mig.Designer.cs">
-      <DependentUpon>201706191205147_First mig.cs</DependentUpon>
+    <Compile Include="Migrations\201706272117334_Database rework.cs" />
+    <Compile Include="Migrations\201706272117334_Database rework.Designer.cs">
+      <DependentUpon>201706272117334_Database rework.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272153003_Fixed Performance.cs" />
+    <Compile Include="Migrations\201706272153003_Fixed Performance.Designer.cs">
+      <DependentUpon>201706272153003_Fixed Performance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272154496_Removed detail form perf.cs" />
+    <Compile Include="Migrations\201706272154496_Removed detail form perf.Designer.cs">
+      <DependentUpon>201706272154496_Removed detail form perf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272335500_fixed viistor id.cs" />
+    <Compile Include="Migrations\201706272335500_fixed viistor id.Designer.cs">
+      <DependentUpon>201706272335500_fixed viistor id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272345174_added ticket buy time.cs" />
+    <Compile Include="Migrations\201706272345174_added ticket buy time.Designer.cs">
+      <DependentUpon>201706272345174_added ticket buy time.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272352093_fixed ticket.cs" />
+    <Compile Include="Migrations\201706272352093_fixed ticket.Designer.cs">
+      <DependentUpon>201706272352093_fixed ticket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706272358563_removed username.cs" />
+    <Compile Include="Migrations\201706272358563_removed username.Designer.cs">
+      <DependentUpon>201706272358563_removed username.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Festival.cs" />
+    <Compile Include="Models\Performance.cs" />
+    <Compile Include="Models\Stage.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Context\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Views\PartyEntities\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706191205147_First mig.resx">
-      <DependentUpon>201706191205147_First mig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706272117334_Database rework.resx">
+      <DependentUpon>201706272117334_Database rework.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272153003_Fixed Performance.resx">
+      <DependentUpon>201706272153003_Fixed Performance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272154496_Removed detail form perf.resx">
+      <DependentUpon>201706272154496_Removed detail form perf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272335500_fixed viistor id.resx">
+      <DependentUpon>201706272335500_fixed viistor id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272345174_added ticket buy time.resx">
+      <DependentUpon>201706272345174_added ticket buy time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272352093_fixed ticket.resx">
+      <DependentUpon>201706272352093_fixed ticket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706272358563_removed username.resx">
+      <DependentUpon>201706272358563_removed username.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

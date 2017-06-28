@@ -1,0 +1,38 @@
+﻿@model List<Model.Models.Performance>
+@{
+    ViewBag.Title = "Performances";
+}
+<h2>Performances at @ViewBag.festival</h2>
+<table class="table">
+    <tr>
+        <th>
+            Artist
+        </th>
+        <th>
+            StartTime
+        </th>
+        <th>
+            EndTime
+        </th>
+        <th>
+            Stage
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Artist
+            </td>
+            <td>
+                @item.StartTime
+            </td>
+            <td>
+                @item.EndTime
+            </td>
+            <td>
+                @item.Stage.Name
+            </td>
+        </tr>
+    }
+</table>
