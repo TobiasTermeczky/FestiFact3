@@ -21,7 +21,9 @@ namespace Model.Concrete
         public DbSet<Performance> Performances { get; set;}
         
         public DbSet<Stage> Stages { get; set; }
-        
+
+        public DbSet<Rating> Ratings { get; set; }
+
         public override int SaveChanges()
         {
             return base.SaveChanges();

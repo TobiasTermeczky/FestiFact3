@@ -1,0 +1,174 @@
+﻿@model Model.Models.Festival
+@{
+    ViewBag.Title = "DetailFestival";
+}
+<h2>DetailFestival</h2>
+<div>
+    <h4>Festival</h4>
+    <hr />
+    <div class="col-md-6 col-sm-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StartTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EndTime)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MaxTicket)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MaxTicket)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genre)
+            </dd>
+
+
+            <dt>
+                Stages (@ViewBag.totalStages)
+            </dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var stage in ViewBag.stages)
+                    {
+                        <tr>
+                            <td>
+                                @stage.Name
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteStage", new { stage.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <p>
+                    @Html.ActionLink("Add New", "CreateStage", new { id = Model.Id })
+                </p>
+            </dd>
+
+
+
+            <dt>
+                Performances (@ViewBag.totalPerformances)
+            </dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Stage
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var performance in ViewBag.performances)
+                    {
+                        <tr>
+                            <td>
+                                @performance.Artist
+                            </td>
+                            <td>
+                                @performance.Stage.Name
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(performance.StartTime).ToString("HH:mm")
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeletePerformance", new { performance.Id })
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <p>
+                    @Html.ActionLink("Add New", "CreatePerformance", new { id = Model.Id })
+                </p>
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div id="salesContainer" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditFestival", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<script type="text/javascript">
+    Highcharts.chart('salesContainer', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Ticket Sales'
+        },
+        xAxis: {
+            categories: ['Sales']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Ticket amount'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: 'Sold',
+            data: [ @ViewBag.soldTickets ]
+        }, {
+            name: 'Unsold',
+            data: [ @ViewBag.ticketsLeft ]
+        }]
+    });
+</script>

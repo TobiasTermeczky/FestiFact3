@@ -60,15 +60,23 @@
         <div>Tickets left: @ViewBag.ticketsLeft</div>
         <div>
             @if (ViewBag.ticketsLeft > 0)
-        {
-            @Html.ActionLink("Buy Ticket", "BuyTicket", "Ticket", new { id = Model.Id }, new { @class = "btn btn-success" })
-        }
-        else
-        {
-            <span>Sold out!</span>
-        }
+            {
+                @Html.ActionLink("Buy Ticket", "BuyTicket", "Ticket", new { id = Model.Id }, new { @class = "btn btn-success" })
+            }
+            else
+            {
+                <span>Sold out!</span>
+            }
+        </div>
     </div>
-</div>
+    <div class="col-xs-4">
+            <div>Upvotes: @ViewBag.Upvotes - Downvotes: @ViewBag.Downvotes</div>
+            <div>
+                @Html.ActionLink("Upvote Festival", "RateFestival", "Festival", new { id = Model.Id, vote = "up" }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Downvote Festival", "RateFestival", "Festival", new { id = Model.Id, vote = "down" }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+
 </div>
 <p>
     @Html.ActionLink("Back to Index", "Index")

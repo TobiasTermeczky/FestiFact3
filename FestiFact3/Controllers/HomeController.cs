@@ -21,7 +21,7 @@ namespace FestiFact3.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Organizer")]
+        [Authorize(Roles = "organiser")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

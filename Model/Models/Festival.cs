@@ -21,4 +21,6 @@ namespace Model.Models
         public int MaxTicket { get; set; }
         public string ImageLink { get; set; }
     }
+
+
 }

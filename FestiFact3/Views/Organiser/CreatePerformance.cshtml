@@ -1,0 +1,56 @@
+﻿@model Model.Models.Performance
+@{
+    ViewBag.Title = "CreatePerformance";
+}
+<h2>CreatePerformance</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.Hidden("festivalId", (int)ViewBag.festival.Id)
+        <h4>Performance</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <span class="text-danger">@ViewBag.error</span>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Artist, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Artist, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Stage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("stageId", (SelectList)ViewBag.stageSelectList)
+                @Html.ValidationMessageFor(model => model.Stage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to Festival", "DetailFestival", new { id = ViewBag.festival.Id })
+</div>
+@section Scripts {
+}

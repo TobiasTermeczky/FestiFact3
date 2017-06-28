@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Model.Models;
 using Model.Abstract;
+using FestiFact3.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
 
 namespace FestiFact3.Controllers
 {
@@ -21,7 +24,7 @@ namespace FestiFact3.Controllers
         // GET: Festival
         public ViewResult Index(string search)
         {
-            IEnumerable<Festival> festivals;
+            List<Festival> festivals;
 
             if (search != null)
             {
@@ -30,20 +33,16 @@ namespace FestiFact3.Controllers
                 if (DateTime.TryParse(search, out searchDate))
                 {
                     festivals = repo.Festivals
-                        .Where(f => f.StartTime == searchDate);
+                        .Where(f => f.StartTime == searchDate).ToList();
                 }
                 else
                 {
-                    festivals = repo.Festivals
-                        .Where(f => f.Name.Contains(search) ||
-                        f.Location.Contains(search) ||
-                        f.Genre.Contains(search) || 
-                        f.Description.Contains(search));
+                    festivals = repo.SearchFestival(search);
                 }
             }
             else
             {
-                festivals = repo.Festivals;
+                festivals = repo.Festivals.ToList();
             }
 
             return View(festivals);
@@ -51,21 +50,28 @@ namespace FestiFact3.Controllers
 
         public ActionResult Detail(int id)
         {
-            Festival festival = repo.Festivals.FirstOrDefault(f => f.Id == id);
-            int totalTickets = festival.MaxTicket;
-            int soldTickets = repo.Tickets.Count(t => t.Festival.Id == festival.Id);
-            int ticketsLeft = totalTickets - soldTickets;
-
-            ViewBag.ticketsLeft = ticketsLeft;
-            return View(festival);
+            ViewBag.ticketsLeft = repo.TicketsLeft(id);
+            ViewBag.Upvotes = repo.Upvotes(id);
+            ViewBag.Downvotes = repo.Downvotes(id);
+            return View(repo.FestivalById(id));
         }
 
         public ActionResult Performances(int id)
         {
-            Festival festival = repo.Festivals.FirstOrDefault(f => f.Id == id);
+            Festival festival = repo.FestivalById(id);
             List<Performance> performances = repo.PerformancesByFestival(festival);
             ViewBag.festival = festival.Name;
             return View(performances);
+        }
+
+        public ActionResult RateFestival(int id, string vote)
+        {
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user = userManager.FindById(User.Identity.GetUserId());
+
+            repo.AddRating(id, vote, user.Id);
+
+            return RedirectToAction("Detail", new { id = id });
         }
     }
 }

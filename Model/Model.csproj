@@ -155,9 +155,22 @@
     <Compile Include="Migrations\201706272358563_removed username.Designer.cs">
       <DependentUpon>201706272358563_removed username.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706281125135_ratings.cs" />
+    <Compile Include="Migrations\201706281125135_ratings.Designer.cs">
+      <DependentUpon>201706281125135_ratings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706281132337_ratings nummer 1.cs" />
+    <Compile Include="Migrations\201706281132337_ratings nummer 1.Designer.cs">
+      <DependentUpon>201706281132337_ratings nummer 1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706281142508_fix rating.cs" />
+    <Compile Include="Migrations\201706281142508_fix rating.Designer.cs">
+      <DependentUpon>201706281142508_fix rating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Festival.cs" />
     <Compile Include="Models\Performance.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Stage.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +196,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706272358563_removed username.resx">
       <DependentUpon>201706272358563_removed username.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706281125135_ratings.resx">
+      <DependentUpon>201706281125135_ratings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706281132337_ratings nummer 1.resx">
+      <DependentUpon>201706281132337_ratings nummer 1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706281142508_fix rating.resx">
+      <DependentUpon>201706281142508_fix rating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
