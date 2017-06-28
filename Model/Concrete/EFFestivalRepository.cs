@@ -252,5 +252,15 @@ namespace Model.Concrete
         {
             return _dbContext.Tickets.Where(t => t.UserId == userId).Include(t => t.Festival).OrderByDescending(t => t.BuyDateTime);
         }
+
+        public void DropDatabase()
+        {
+            _dbContext.Database.Delete();
+        }
+
+        public int StagePerformanceCount(int stageId)
+        {
+            return _dbContext.Performances.Count(p => p.Stage.Id == stageId);
+        }
     }
 }

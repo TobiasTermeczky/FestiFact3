@@ -1,7 +1,7 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(FestiFact3.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(FestiFact3.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnitTests.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(UnitTests.App_Start.NinjectWebCommon), "Stop")]
 
-namespace FestiFact3.App_Start
+namespace UnitTests.App_Start
 {
     using System;
     using System.Web;
@@ -14,11 +14,6 @@ namespace FestiFact3.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
-
-        public static object CreatePublicKernel()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Starts the application
@@ -66,7 +61,6 @@ namespace FestiFact3.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            System.Web.Mvc.DependencyResolver.SetResolver(new Infrastructure.NinjectDependencyResolver(kernel));
-        }
+        }        
     }
 }
