@@ -1,0 +1,24 @@
+﻿@model IEnumerable<FestiFact3.Models.ApplicationUser>
+@{
+    ViewBag.Title = "PendingOrganisers";
+}
+<h2>PendingOrganisers</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Allow Organiser", "AllowOrganiser", "Manage", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>

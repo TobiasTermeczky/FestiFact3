@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FestiFact3.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FestiFact3.Controllers
 {
@@ -72,6 +73,11 @@ namespace FestiFact3.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+
+            ViewBag.User = currentUser;
+
             return View(model);
         }
 
@@ -382,6 +388,49 @@ namespace FestiFact3.Controllers
             Error
         }
 
-#endregion
+        #endregion
+
+        public ActionResult RequestOrganiserStatus()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            user.OrganiserRequested = true;
+
+            UserManager.Update(user);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AllowOrganiser(string id)
+        {
+            // Check if user is authorized as a manager
+            if (!User.IsInRole("Admin")) { return View("NotAuthorized"); }
+
+            // Get user by email
+            ApplicationUser currentUser = new ApplicationDbContext().Users.FirstOrDefault(x => x.Id == id);
+
+            // Set user role to organiser
+            UserManager.AddToRole(currentUser.Id, "organiser");
+
+            // Set organiserRequested to false
+            var user = UserManager.FindById(currentUser.Id);
+            user.OrganiserRequested = false;
+            UserManager.Update(user);
+
+            return RedirectToAction("PendingOrganisers", "Admin");
+        }
+
+        public ActionResult DeleteFromOrganisers(string id)
+        {
+
+            // Check if user is authorized as a manager
+            if (!User.IsInRole("Admin")) { return View("NotAuthorized"); }
+
+            ApplicationUser currentUser = new ApplicationDbContext().Users.FirstOrDefault(x => x.Id == id);
+
+            UserManager.RemoveFromRole(currentUser.Id, "organiser");
+
+            return RedirectToAction("ListOrganisers", "Admin");
+        }
     }
 }

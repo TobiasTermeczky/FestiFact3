@@ -187,6 +187,7 @@
     <Compile Include="Controllers\FestivalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
@@ -200,6 +201,10 @@
     <Compile Include="Migrations\201706272335351_fixed visitor id.cs" />
     <Compile Include="Migrations\201706272335351_fixed visitor id.Designer.cs">
       <DependentUpon>201706272335351_fixed visitor id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706280043085_req or.cs" />
+    <Compile Include="Migrations\201706280043085_req or.Designer.cs">
+      <DependentUpon>201706280043085_req or.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -292,6 +297,10 @@
     <Content Include="Views\Festival\Performances.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\Details.cshtml" />
+    <Content Include="Views\Admin\EditOrganiser.cshtml" />
+    <Content Include="Views\Admin\ListOrganisers.cshtml" />
+    <Content Include="Views\Admin\PendingOrganisers.cshtml" />
+    <Content Include="Views\Shared\NotAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -312,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706272335351_fixed visitor id.resx">
       <DependentUpon>201706272335351_fixed visitor id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280043085_req or.resx">
+      <DependentUpon>201706280043085_req or.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
