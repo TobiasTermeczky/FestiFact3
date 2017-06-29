@@ -90,6 +90,14 @@ namespace FestiFact3.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = userManager.FindById(User.Identity.GetUserId());
+
+                if (user.Id != festival.OrganizerID)
+                {
+                    return View("NotAuthorized");
+                }
+
                 repo.EditFestival(festival);
                 return RedirectToAction("Index");
             }
@@ -132,11 +140,52 @@ namespace FestiFact3.Controllers
             {
                 var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var user = userManager.FindById(User.Identity.GetUserId());
+                Festival festival = repo.FestivalById(festivalId);
 
-                stage.Festival = repo.FestivalById(festivalId);
+                if (user.Id != festival.OrganizerID)
+                {
+                    return View("NotAuthorized");
+                }
+
+                stage.Festival = festival;
 
                 repo.AddStage(stage);
 
+                return RedirectToAction("DetailFestival", new { stage.Festival.Id });
+            }
+            else
+            {
+                // There is a validation error
+                return View();
+            }
+        }
+
+        [Authorize(Roles = "organiser")]
+        public ActionResult EditStage(int id)
+        {
+            Stage stage = repo.StageById(id);
+            ViewBag.festival = stage.Festival;
+            return View(repo.StageById(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "organiser")]
+        public ActionResult EditStage(Stage stage, int festivalId)
+        {
+            if (ModelState.IsValid)
+            {
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = userManager.FindById(User.Identity.GetUserId());
+                Festival festival = repo.FestivalById(festivalId);
+
+                if (user.Id != festival.OrganizerID)
+                {
+                    return View("NotAuthorized");
+                }
+
+                stage.Festival = festival;
+
+                repo.EditStage(stage);
                 return RedirectToAction("DetailFestival", new { stage.Festival.Id });
             }
             else
@@ -190,6 +239,15 @@ namespace FestiFact3.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = userManager.FindById(User.Identity.GetUserId());
+                Festival festival = repo.FestivalById(festivalId);
+
+                if (user.Id != festival.OrganizerID)
+                {
+                    return View("NotAuthorized");
+                }
+
                 Stage stage = repo.StageById(Int32.Parse(stageId));
                 performance.Stage = stage;
 

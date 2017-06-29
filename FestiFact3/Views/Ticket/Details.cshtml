@@ -41,11 +41,11 @@
             </td>
             <td id="ticketinfo">
                 <h1>@Model.Festival.Name</h1>
-                <h3>@Model.Festival.StartTime.ToString("dd/MM/yyyy HH:mm")</h3>
-                <h3>@Model.Festival.Location</h3>
+                <h3>Date & Time: @Model.Festival.StartTime.ToString("dd/MM/yyyy HH:mm")</h3>
+                <h3>Location: @Model.Festival.Location</h3>
                 <h3>€@Model.Festival.Price</h3>
                 <h2>@Model.UserEmail</h2>
-                <h3>@Model.BuyDateTime.ToString("dd/MM/yyyy HH:mm")</h3>
+                <h3>Ticket bought on: @Model.BuyDateTime.ToString("dd/MM/yyyy HH:mm")</h3>
             </td>
         </tr>
     </table>

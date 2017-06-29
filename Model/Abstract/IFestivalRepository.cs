@@ -31,6 +31,7 @@ namespace Model.Abstract
         bool EditFestival(Festival festival);
         bool DeleteFestival(Festival festival);
         bool AddStage(Stage stage);
+        bool EditStage(Stage stage);
         bool DeleteStage(Stage stage);
         bool AddPerformance(Performance performance);
         bool DeletePerformance(Performance performance);

@@ -68,12 +68,16 @@
                             Name
                         </th>
                         <th></th>
+                        <th></th>
                     </tr>
                     @foreach (var stage in ViewBag.stages)
                     {
                         <tr>
                             <td>
                                 @stage.Name
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditStage", new { stage.Id })
                             </td>
                             <td>
                                 @Html.ActionLink("Delete", "DeleteStage", new { stage.Id })

@@ -162,6 +162,14 @@ namespace Model.Concrete
             return true;
         }
 
+        public bool EditStage(Stage stage)
+        {
+            _dbContext.Stages.Attach(stage);
+            _dbContext.Entry(stage).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+            return true;
+        }
+
         public Festival FestivalById(int festivalId)
         {
             return _dbContext.Festivals.FirstOrDefault(f => f.Id == festivalId);
