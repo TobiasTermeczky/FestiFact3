@@ -298,6 +298,93 @@ namespace FestiFact3.Controllers
             
         }
 
+        [Authorize(Roles = "organiser")]
+        public ActionResult EditPerformance(int id)
+        {
+            Performance performance = repo.PerformanceById(id);
+            List<Stage> stages = repo.StagesByFestival(performance.Stage.Festival);
+            List<SelectListItem> stagelist = new List<SelectListItem>();
+            foreach (Stage stage in stages)
+            {
+                var stageListItem = new SelectListItem
+                {
+                    Text = stage.Name,
+                    Value = stage.Id.ToString()
+                };
+                stagelist.Add(stageListItem);
+            }
+            SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
+            ViewBag.stageSelectList = stageSelectList;
+            ViewBag.festival = performance.Stage.Festival;
+            ViewBag.overlap = "";
+            return View(repo.PerformanceById(id));
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "organiser")]
+        public ActionResult EditPerformance(Performance performance, int festivalId, string stageId)
+        {
+            if (ModelState.IsValid)
+            {
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var user = userManager.FindById(User.Identity.GetUserId());
+                Festival festival = repo.FestivalById(festivalId);
+
+                if (user.Id != festival.OrganizerID)
+                {
+                    return View("NotAuthorized");
+                }
+
+                Stage stage = repo.StageById(Int32.Parse(stageId));
+                performance.Stage = stage;
+
+                string overlapResult = repo.EditPerformance(performance);
+                if (overlapResult != "Success")
+                {
+                    //Overlap
+                    List<Stage> stages = repo.StagesByFestival(repo.FestivalById(festivalId));
+                    List<SelectListItem> stagelist = new List<SelectListItem>();
+                    foreach (Stage stageIndu in stages)
+                    {
+                        var stageListItem = new SelectListItem
+                        {
+                            Text = stageIndu.Name,
+                            Value = stageIndu.Id.ToString()
+                        };
+                        stagelist.Add(stageListItem);
+                    }
+                    SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
+                    ViewBag.stageSelectList = stageSelectList;
+                    ViewBag.festival = repo.FestivalById(festivalId);
+                    ViewBag.overlap = overlapResult;
+                    return View(performance);
+                }
+                return RedirectToAction("DetailFestival", new { id = festivalId });
+            }
+            else
+            {
+                //There is a validation error
+                List<Stage> stages = repo.StagesByFestival(repo.FestivalById(festivalId));
+                List<SelectListItem> stagelist = new List<SelectListItem>();
+                foreach (Stage stageIndu in stages)
+                {
+                    var stageListItem = new SelectListItem
+                    {
+                        Text = stageIndu.Name,
+                        Value = stageIndu.Id.ToString()
+                    };
+                    stagelist.Add(stageListItem);
+                }
+                SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
+                ViewBag.stageSelectList = stageSelectList;
+                ViewBag.festival = repo.FestivalById(festivalId);
+                ViewBag.overlap = "";
+                return View(performance);
+            }
+
+        }
+
+
 
         [Authorize(Roles = "organiser")]
         public ActionResult DeletePerformance(int id)

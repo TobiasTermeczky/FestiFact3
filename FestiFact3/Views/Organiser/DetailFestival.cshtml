@@ -108,6 +108,7 @@
                             Time
                         </th>
                         <th></th>
+                        <th></th>
                     </tr>
                     @foreach (var performance in ViewBag.performances)
                     {
@@ -120,6 +121,9 @@
                             </td>
                             <td>
                                 @Convert.ToDateTime(performance.StartTime).ToString("HH:mm")
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditPerformance", new { performance.Id })
                             </td>
                             <td>
                                 @Html.ActionLink("Delete", "DeletePerformance", new { performance.Id })
