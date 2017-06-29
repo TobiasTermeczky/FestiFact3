@@ -39,32 +39,46 @@ namespace Model.Concrete
             return true;
         }
 
-        public bool AddPerformance(Performance performance)
+        public string AddPerformance(Performance performance)
         {
             List<Performance> performances = PerformancesByStage(performance.Stage);
             Festival festival = performance.Stage.Festival;
-            if(performance.StartTime < festival.StartTime)
-            {
-                return false;
-            }
-            if (performance.EndTime > festival.EndTime)
-            {
-                return false;
-            }
             if (performance.EndTime < performance.StartTime)
             {
-                return false;
+                return "Endtime is before Starttime";
+            }
+
+            if (performance.StartTime < festival.StartTime || performance.EndTime > festival.EndTime)
+            {
+                return "Outside of festival time, StartTime: " + festival.StartTime + ", EndTime: " + festival.EndTime;
             }
             foreach (Performance p in performances)
             {
-                if (performance.StartTime < p.EndTime && p.StartTime < performance.EndTime)
+                if(p.StartTime > performance.StartTime)
                 {
-                    return false;
+                    if(p.StartTime >= performance.EndTime)
+                    {
+
+                    }
+                    else
+                    {
+                        return "Overlap with "+ p.Artist + ", StartTime: " + p.StartTime + ", EndTime: " + p.EndTime;
+                    }
+                }
+                if (p.StartTime <= performance.StartTime)
+                {
+                    if(p.EndTime <= performance.StartTime)
+                    {
+
+                    }
+                    else {
+                        return "Overlap with " + p.Artist + ", StartTime: " + p.StartTime + ", EndTime: " + p.EndTime;
+                    }
                 }
             }
             _dbContext.Performances.Add(performance);
             _dbContext.SaveChanges();
-            return true;
+            return "Success";
         }
 
         public bool AddRating(int festivalId, string vote, string userId)
@@ -269,6 +283,53 @@ namespace Model.Concrete
         public int StagePerformanceCount(int stageId)
         {
             return _dbContext.Performances.Count(p => p.Stage.Id == stageId);
+        }
+
+        public string EditPerformance(Performance performance)
+        {
+            List<Performance> performances = PerformancesByStage(performance.Stage);
+            Festival festival = performance.Stage.Festival;
+            if (performance.EndTime < performance.StartTime)
+            {
+                return "Endtime is before Starttime";
+            }
+
+            if (performance.StartTime < festival.StartTime || performance.EndTime > festival.EndTime)
+            {
+                return "Outside of festival time, StartTime: " + festival.StartTime + ", EndTime: " + festival.EndTime;
+            }
+            foreach (Performance p in performances)
+            {
+                if (p.Id != performance.Id)
+                {
+                    if (p.StartTime > performance.StartTime)
+                    {
+                        if (p.StartTime >= performance.EndTime)
+                        {
+
+                        }
+                        else
+                        {
+                            return "overlap with " + p.Artist + ", StartTime: " + p.StartTime + ", EndTime: " + p.EndTime;
+                        }
+                    }
+                    if (p.StartTime < performance.StartTime)
+                    {
+                        if (p.EndTime <= performance.StartTime)
+                        {
+
+                        }
+                        else
+                        {
+                            return "overlap with " + p.Artist + ", StartTime: " + p.StartTime + ", EndTime: " + p.EndTime;
+                        }
+                    }
+                }
+            }
+            _dbContext.Performances.Attach(performance);
+            _dbContext.Entry(performance).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+            return "success";
         }
     }
 }

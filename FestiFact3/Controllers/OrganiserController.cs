@@ -230,6 +230,7 @@ namespace FestiFact3.Controllers
             SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
             ViewBag.stageSelectList = stageSelectList;
             ViewBag.festival = repo.FestivalById(id);
+            ViewBag.overlap = "";
             return View();
         }
 
@@ -251,8 +252,8 @@ namespace FestiFact3.Controllers
                 Stage stage = repo.StageById(Int32.Parse(stageId));
                 performance.Stage = stage;
 
-                bool noOverlap = repo.AddPerformance(performance);
-                if(noOverlap == false)
+                string overlapResult = repo.AddPerformance(performance);
+                if(overlapResult != "Success")
                 {
                     //Overlap
                     List<Stage> stages = repo.StagesByFestival(repo.FestivalById(festivalId));
@@ -269,6 +270,7 @@ namespace FestiFact3.Controllers
                     SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
                     ViewBag.stageSelectList = stageSelectList;
                     ViewBag.festival = repo.FestivalById(festivalId);
+                    ViewBag.overlap = overlapResult;
                     return View();
                 }
                 return RedirectToAction("DetailFestival", new { id = festivalId });
@@ -290,6 +292,7 @@ namespace FestiFact3.Controllers
                 SelectList stageSelectList = new SelectList(stagelist, "Value", "Text", 1);
                 ViewBag.stageSelectList = stageSelectList;
                 ViewBag.festival = repo.FestivalById(festivalId);
+                ViewBag.overlap = "";
                 return View();
             }
             

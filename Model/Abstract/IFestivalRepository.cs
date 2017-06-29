@@ -33,7 +33,8 @@ namespace Model.Abstract
         bool AddStage(Stage stage);
         bool EditStage(Stage stage);
         bool DeleteStage(Stage stage);
-        bool AddPerformance(Performance performance);
+        string AddPerformance(Performance performance);
+        string EditPerformance(Performance performance);
         bool DeletePerformance(Performance performance);
         bool AddRating(int festivalId, string vote, string userId);
         int Upvotes(int festivalId);
